@@ -12,4 +12,8 @@ class AppTextStyle {
     fontSize: 24,
     color: Colors.limeAccent,
   );
+  static TextStyle topBarStyle = const TextStyle(
+    fontSize: 20,
+    color: Colors.black54,
+  );
 }

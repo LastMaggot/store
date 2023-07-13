@@ -1,29 +1,36 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
-import 'package:store/style/appStyle.dart';
+import 'package:store/style/app_style.dart';
 
-class PageFrame extends StatefulWidget{
+class PageFrame extends StatefulWidget {
   final Widget? body;
-  PageFrame({Key? key,this.body}) : super(key: key);
+  PageFrame({Key? key, this.body}) : super(key: key);
   @override
   _PageFrameState createState() => _PageFrameState();
 }
 
 class _PageFrameState extends State<PageFrame> {
-
   int currentPageIdx = 0;
+  bool? _isLogin;
+  String? userName;
+  String? vipLevel;
 
   @override
   void initState() {
     currentPageIdx = 0;
+    SharedPreferences cache = context.read<AppGlobals>().cache;
+    _isLogin = cache.getBool('isLogin');
+    if(_isLogin == null) {
+      _isLogin = false;
+      userName = cache.getString('userName');
+      vipLevel = cache.getString('vipLevel');
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Fluttertoast.showToast(msg: "测试Toast",timeInSecForIosWeb: 5);
     return Scaffold(
       appBar: AppBar(
         leading: Builder(
@@ -88,6 +95,11 @@ class _PageFrameState extends State<PageFrame> {
                 // Handle onTap event for Settings
               },
             ),
+            ListTile(
+              leading: Icon(Icons.manage_accounts_rounded),
+              title: Text("管理员登录"),
+              onTap: () {},
+            )
           ],
         ),
       ),
@@ -95,8 +107,8 @@ class _PageFrameState extends State<PageFrame> {
         currentIndex: currentPageIdx,
         iconSize: 24,
         onTap: (index) {
-
           currentPageIdx = index;
+          setState(() {});
         },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -105,29 +117,34 @@ class _PageFrameState extends State<PageFrame> {
             tooltip: "主页",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.shopping_cart_rounded),
+            label: 'Cart',
             tooltip: "设置页",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.airplane_ticket),
+            label: "Order",
+            tooltip: "订单",
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-      showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            height: 200,
-            color: Colors.white,
-            child: Center(
-              child: Text('Bottom Sheet Content'),
-            ),
+          showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.white,
+                child: Center(
+                  child: Text('Bottom Sheet Content'),
+                ),
+              );
+            },
           );
         },
-      );
-    },
-    child: Icon(Icons.add),
-    ),
+        child: Icon(Icons.add),
+      ),
       body: widget.body,
     );
   }

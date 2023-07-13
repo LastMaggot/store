@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:store/appPages.dart';
 import 'package:store/comphonents/AppPageFrame.dart';
+import 'package:store/comphonents/slide_verify_widget.dart';
 import 'package:store/global/app_globals.dart';
-import 'package:store/style/AppTextStyle.dart';
 import 'package:store/reference/references.dart';
-import 'package:store/util/logs.dart';
+import 'package:store/sign/sign_in/sign_in_form.dart';
+import 'package:store/sign/sign_up/sign_up_form.dart';
 
 void main() async {
   SharedPreferences cache = await SharedPreferences.getInstance();
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: FToastBuilder(),
+      themeMode: ThemeMode.light,
       onGenerateRoute: (RouteSettings settings) {
         String? name = settings.name;
         switch (name) {
@@ -28,6 +30,10 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => HomePage());
           case "/sign":
             return MaterialPageRoute(builder: (context) => SignPage());
+          case "/sign_in":
+            return MaterialPageRoute(builder: (context) => SignPage(body: SignInForm(),));
+          case "/sign_up":
+            return MaterialPageRoute(builder: (context) => SignPage(body: SignUpForm(),));
           case "/user":
             return MaterialPageRoute(builder: (context) => UserPage());
           case "/admin":
@@ -45,7 +51,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: PageFrame(),
+      home: PageFrame(body: HomePage(),),
     );
   }
 }
