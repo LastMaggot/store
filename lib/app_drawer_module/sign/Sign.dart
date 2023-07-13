@@ -2,11 +2,9 @@ import 'dart:js_interop';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:store/sign/sign_in/sign_in_form.dart';
-import 'package:store/sign/sign_up/sign_up_form.dart';
+import 'package:store/app_drawer_module/sign/sign_in/sign_in_form.dart';
+import 'package:store/app_drawer_module/sign/sign_up/sign_up_form.dart';
 import 'package:store/style/app_style.dart';
-import 'package:store/util/logs.dart';
 
 class SignPage extends StatefulWidget {
   Widget? body;

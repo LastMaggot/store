@@ -2,7 +2,5 @@ library AppPages;
 
 export 'package:store/admin/AdminPage.dart';
 export 'package:store/user/UserPage.dart';
-export 'package:store/order/OrderPage.dart';
-export 'package:store/home/HomePage.dart';
-export 'package:store/shopping/ShoppingOrder.dart';
-export 'package:store/sign/Sign.dart';
+export 'package:store/app_drawer_module/app_drawer_module.dart';
+export 'package:store/app_bottom_modules/app_bottom_modules.dart';

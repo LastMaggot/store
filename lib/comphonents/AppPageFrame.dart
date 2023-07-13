@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:store/appPages.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
 import 'package:store/style/app_style.dart';
 
 class PageFrame extends StatefulWidget {
-  final Widget? body;
+  Widget? body;
   PageFrame({Key? key, this.body}) : super(key: key);
   @override
   _PageFrameState createState() => _PageFrameState();
@@ -15,6 +16,21 @@ class _PageFrameState extends State<PageFrame> {
   bool? _isLogin;
   String? userName;
   String? vipLevel;
+
+  void showHome() {
+    widget.body = HomePage();
+    setState(() {
+
+    });
+  }
+
+  void showCart() {
+
+  }
+
+  void showUser() {
+    widget.body = UserPage();
+  }
 
   @override
   void initState() {
@@ -85,12 +101,12 @@ class _PageFrameState extends State<PageFrame> {
               leading: Icon(Icons.home),
               title: Text('Home'),
               onTap: () {
-                // Handle onTap event for Home
+                showHome();
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: Icon(Icons.person),
+              title: Text('UserInfo'),
               onTap: () {
                 // Handle onTap event for Settings
               },
@@ -119,7 +135,7 @@ class _PageFrameState extends State<PageFrame> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_rounded),
             label: 'Cart',
-            tooltip: "设置页",
+            tooltip: "购物车",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.airplane_ticket),

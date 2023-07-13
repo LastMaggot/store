@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:store/appPages.dart';
+import 'package:store/app_drawer_module/sign/sign_in/sign_in_form.dart';
+import 'package:store/app_drawer_module/sign/sign_up/sign_up_form.dart';
 import 'package:store/comphonents/AppPageFrame.dart';
-import 'package:store/comphonents/slide_verify_widget.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
-import 'package:store/sign/sign_in/sign_in_form.dart';
-import 'package:store/sign/sign_up/sign_up_form.dart';
 
 void main() async {
   SharedPreferences cache = await SharedPreferences.getInstance();
