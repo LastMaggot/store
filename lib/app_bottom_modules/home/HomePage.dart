@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:store/comphonents/search_bar.dart';
 import 'package:store/util/logs.dart';
+import 'package:store/appPages.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -33,6 +34,7 @@ class _HomePageState extends State<HomePage> {
                 height: height*0.05,
               ),
             ),
+            ProjectIntroducePage(),
           ],
         ),
       ),
