@@ -8,3 +8,4 @@ enum VipLevel {
 }
 
 final Dio dio = Dio();
+String requestUrl = "http://localhost:8080";

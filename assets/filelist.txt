@@ -1,0 +1,2 @@
+- assets/images/noImage.png
+- assets/images/CNY.png

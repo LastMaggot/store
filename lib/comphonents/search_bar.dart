@@ -10,7 +10,7 @@ class AppSearchBar extends StatelessWidget {
   String? labelText;
   String? hintText;
   void Function()? onPressed;
-  void Function()? onSearch;
+  void Function(String searchContent)? onSearch;
 
   void _onPressed() {
     onPressed;
@@ -28,12 +28,17 @@ class AppSearchBar extends StatelessWidget {
     return;
   }
 
-  AppSearchBar({Key? key, this.width = 250, this.height = 32, this.hintText})
+  AppSearchBar(
+      {Key? key,
+      this.width = 250,
+      this.height = 32,
+      this.hintText,
+      this.controller,
+      this.onSearch})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    controller = (controller == null)? controller : TextEditingController();
     return Container(
       width: width,
       height: height,
@@ -41,35 +46,44 @@ class AppSearchBar extends StatelessWidget {
           border: Border.all(color: Theme.of(context).primaryColor),
           borderRadius: BorderRadius.circular(height)),
       child: TextField(
-          autofocus: false,
-          controller: controller,
-          decoration:
-          InputDecoration(
+        autofocus: false,
+        controller: controller,
+        decoration: InputDecoration(
             labelText: labelText ?? "商品名",
-              hintText: hintText ?? "请输入搜索词",
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
-              contentPadding: EdgeInsets.only(bottom: height / 3),
-              border: InputBorder.none,
-              icon: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 0),
-                  child: Icon(
-                    Icons.search,
-                    size: 24,
-                    color: Theme.of(context).primaryColor,
-                  )),
-              suffixIcon: IconButton(
-                icon: const Icon(
-                  Icons.close,
-                  size: 17,
-                ),
-                onPressed: () {
-                  _clearInput();
-                },
-                splashColor: Theme.of(context).primaryColor,
-              )),
-          onEditingComplete: () {
-            this.onSearch;
-          }),
+            hintText: hintText ?? "请输入搜索词",
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+            contentPadding: EdgeInsets.only(bottom: height / 3),
+            border: InputBorder.none,
+            icon: Padding(
+                padding: const EdgeInsets.only(left: 10, top: 0),
+                child: Icon(
+                  Icons.search,
+                  size: 24,
+                  color: Theme.of(context).primaryColor,
+                )),
+            suffixIcon: IconButton(
+              icon: const Icon(
+                Icons.close,
+                size: 17,
+              ),
+              onPressed: () {
+                _clearInput();
+              },
+              splashColor: Theme.of(context).primaryColor,
+            )),
+        onSubmitted: (String searchContent) {
+          if(searchContent == null || searchContent == "") {
+            Fluttertoast.showToast(msg: "无效的搜索内容");
+            return;
+          }
+          else {
+            if(onSearch != null) {
+              onSearch!(searchContent);
+            }
+            return;
+          }
+        },
+      ),
     );
   }
 }

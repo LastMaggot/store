@@ -16,4 +16,14 @@ class AppTextStyle {
     fontSize: 20,
     color: Colors.black54,
   );
+  static TextStyle goodsWidgetName = const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+  static TextStyle goodsWidgetPrice = const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Colors.red,
+  );
 }

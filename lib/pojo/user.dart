@@ -5,6 +5,8 @@ part 'user.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Customer {
   int? id;
+  String? account;
+  String? password;
   String? username;
   CustomerLevel? level;
   DateTime? registrationDate;
@@ -14,6 +16,8 @@ class Customer {
 
   Customer({
     this.id,
+    this.account,
+    this.password,
     this.username,
     this.level,
     this.registrationDate,
@@ -41,7 +45,6 @@ class Customer {
         return "未知级别";
     }
   }
-
 }
 
 enum CustomerLevel {

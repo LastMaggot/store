@@ -8,6 +8,8 @@ part of 'user.dart';
 
 Customer _$CustomerFromJson(Map<String, dynamic> json) => Customer(
       id: json['id'] as int?,
+      account: json['account'] as String?,
+      password: json['password'] as String?,
       username: json['username'] as String?,
       level: $enumDecodeNullable(_$CustomerLevelEnumMap, json['level']),
       registrationDate: json['registrationDate'] == null
@@ -20,6 +22,8 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) => Customer(
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) => <String, dynamic>{
       'id': instance.id,
+      'account': instance.account,
+      'password': instance.password,
       'username': instance.username,
       'level': _$CustomerLevelEnumMap[instance.level],
       'registrationDate': instance.registrationDate?.toIso8601String(),
