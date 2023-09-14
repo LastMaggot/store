@@ -26,4 +26,14 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     color: Colors.red,
   );
+  static TextStyle addToCarts = const TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+    color: Colors.white
+  );
+  static TextStyle buy = const TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+    color: Colors.white
+  );
 }

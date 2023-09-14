@@ -5,6 +5,7 @@ import 'package:store/Service/goods_service.dart';
 import 'package:store/comphonents/goods_item.dart';
 import 'package:store/comphonents/search_bar.dart';
 import 'package:store/pojo/app_pojo.dart';
+import 'package:store/style/app_style.dart';
 
 class SearchResult extends StatefulWidget {
   String? searchContent;
@@ -29,7 +30,8 @@ class _SearchResultState extends State<SearchResult> {
   void initState() {
     // TODO: implement initState
     if (widget.searchContent != null) {
-      Future<List<Goods>> future = GoodsService.getGoodsByName(widget.searchContent!);
+      Future<List<Goods>> future =
+          GoodsService.getGoodsByName(widget.searchContent!);
       future.then((value) {
         goodsList = value;
         createGoodsItems();
@@ -66,19 +68,29 @@ class _SearchResultState extends State<SearchResult> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AppSearchBar(
-                hintText: "请输入商品名",
-                onSearch: onSearch,
-                controller: searchController,
+              Center(
+                child: AppSearchBar(
+                  hintText: "请输入商品名",
+                  onSearch: onSearch,
+                  controller: searchController,
+                ),
               ),
               SizedBox(
                 height: 15,
               ),
-              (goodsItems != null)
+              (goodsItems != null && goodsItems.length != 0)
                   ? Column(
                       children: goodsItems,
                     )
-                  : Text("没有找到对应的商品"),
+                  : Container(
+                      color: Colors.black12,
+                      child: Center(
+                        child: Text(
+                          "没有找到对应的商品",
+                          style: AppTextStyle.goodsWidgetName,
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),

@@ -18,8 +18,9 @@ class GoodsRequest {
   
   static Future<Response> getGoodsByName(String name) async {
     try {
+      Logger.log(msg: "搜索$name");
       Response response;
-      response = await dio.get("$requestUrl/getGoodsByName",queryParameters: {'name':name});
+      response = await dio.get("$requestUrl/getByName",queryParameters: {'name': "$name"});
       return response;
     } catch (e) {
       Logger.error(msg: e.toString());
