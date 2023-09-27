@@ -1,7 +1,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:store/pojo/goods.dart';
-import 'package:store/pojo/user.dart';
+import 'package:store/pojo/customer.dart';
 
 part 'order.g.dart';
 

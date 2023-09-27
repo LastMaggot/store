@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'customer.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -11,6 +11,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) => Customer(
       account: json['account'] as String?,
       password: json['password'] as String?,
       username: json['username'] as String?,
+      address: json['address'] as String?,
       level: $enumDecodeNullable(_$CustomerLevelEnumMap, json['level']),
       registrationDate: json['registrationDate'] == null
           ? null
@@ -25,6 +26,7 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) => <String, dynamic>{
       'account': instance.account,
       'password': instance.password,
       'username': instance.username,
+      'address': instance.address,
       'level': _$CustomerLevelEnumMap[instance.level],
       'registrationDate': instance.registrationDate?.toIso8601String(),
       'totalSpent': instance.totalSpent,

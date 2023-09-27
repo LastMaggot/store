@@ -26,6 +26,16 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     color: Colors.red,
   );
+  static TextStyle cartGoodsItemTitle = const TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+  static TextStyle cartGoodsItemName = const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+    color: Colors.black
+  );
   static TextStyle addToCarts = const TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.bold,
@@ -34,6 +44,13 @@ class AppTextStyle {
   static TextStyle buy = const TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.bold,
-    color: Colors.white
+    color: Colors.white,
   );
+
+  static TextStyle tipsStyle = const TextStyle(
+    fontSize:24,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
 }

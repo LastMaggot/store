@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:store/appPages.dart';
+import 'package:store/app_bottom_modules/carts/cart_page.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
 import 'package:store/style/app_style.dart';
+import 'package:store/pojo/app_pojo.dart';
+import 'package:store/util/logs.dart';
 
 class PageFrame extends StatefulWidget {
   Widget? body;
@@ -13,34 +16,31 @@ class PageFrame extends StatefulWidget {
 
 class _PageFrameState extends State<PageFrame> {
   int currentPageIdx = 0;
+  Customer? _customer;
+  String? username;
+  CustomerLevel? level;
   bool? _isLogin;
-  String? userName;
-  String? vipLevel;
 
-  void showHome() {
-    widget.body = HomePage();
-    setState(() {
-
-    });
-  }
-
-  void showCart() {
-
-  }
-
-  void showUser() {
-    widget.body = UserPage();
-  }
+  final List<Widget> pages = [HomePage(),CartPage(),UserPage()];
 
   @override
   void initState() {
     currentPageIdx = 0;
-    SharedPreferences cache = context.read<AppGlobals>().cache;
-    _isLogin = cache.getBool('isLogin');
-    if(_isLogin == null) {
-      _isLogin = false;
-      userName = cache.getString('userName');
-      vipLevel = cache.getString('vipLevel');
+
+    AppGlobals _appGlobals = context.read<AppGlobals>();
+    SharedPreferences _cache = _appGlobals.cache;
+    String token = _cache.getString('token')??"null";
+    Logger.log(msg: 'token = ${token}');
+    if(token.length < 20) {
+      _appGlobals.clear();
+      return;
+    }
+    
+    _customer = _appGlobals.customer;
+    _isLogin = _customer != null;
+    if(_isLogin != null && _isLogin == true) {
+      username = _customer?.username;
+      level = _customer?.level;
     }
     super.initState();
   }
@@ -83,15 +83,28 @@ class _PageFrameState extends State<PageFrame> {
                 color: Colors.lightBlueAccent,
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: (_isLogin==false)?[
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/sign');
+                    },
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Text(
+                        "请登入",
+                        style: AppTextStyle.drawerTitleStyle,
+                      ),
+                    ),
+                  ),
+                ]:[
                   Text(
-                    "欢迎级别用户",
+                    username??"test",
                     style: AppTextStyle.drawerTitleStyle,
                   ),
                   Text(
-                    "白金VIP",
+                    "test",
                     style: AppTextStyle.vipTextStyle,
                   )
                 ],
@@ -99,14 +112,13 @@ class _PageFrameState extends State<PageFrame> {
             ),
             ListTile(
               leading: Icon(Icons.home),
-              title: Text('Home'),
+              title: Text('主页'),
               onTap: () {
-                showHome();
               },
             ),
             ListTile(
               leading: Icon(Icons.person),
-              title: Text('UserInfo'),
+              title: Text('用户信息'),
               onTap: () {
                 // Handle onTap event for Settings
               },
@@ -161,7 +173,10 @@ class _PageFrameState extends State<PageFrame> {
         },
         child: Icon(Icons.add),
       ),
-      body: widget.body,
+      body: IndexedStack(
+        index: currentPageIdx,
+        children: pages,
+      ),
     );
   }
 }

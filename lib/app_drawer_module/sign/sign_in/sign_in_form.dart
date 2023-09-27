@@ -1,7 +1,10 @@
 import 'package:store/appPages.dart';
+import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
 import 'package:flutter/material.dart';
+import 'package:store/service/customer_service.dart';
 import 'package:store/style/app_style.dart';
+import 'package:store/pojo/app_pojo.dart';
 
 class SignInForm extends StatefulWidget {
 
@@ -17,7 +20,15 @@ class _SignInFormState extends State<SignInForm> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _onSignIn() {
-
+    String account = _accountController.text;
+    String password = _passwordController.text;
+    Future<Customer?> future = CustomerService.signIn(account, password,context: context);
+    future.then((value) {
+      if(value == null) {
+        return;
+      }
+      Navigator.pushReplacementNamed(context, '/home');
+    });
   }
 
   @override

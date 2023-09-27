@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/appPages.dart';
+import 'package:store/app_bottom_modules/carts/cart_page.dart';
 import 'package:store/app_drawer_module/sign/sign_in/sign_in_form.dart';
 import 'package:store/app_drawer_module/sign/sign_up/sign_up_form.dart';
 import 'package:store/comphonents/AppPageFrame.dart';
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
         switch (name) {
           case "/home":
             return MaterialPageRoute(builder: (context) => PageFrame(body: HomePage(),));
+          case "/cart":
+            return MaterialPageRoute(builder: (context) => PageFrame(body: CartPage(),));
           case "/sign":
             return MaterialPageRoute(builder: (context) => SignPage(),);
           case "/sign_in":
@@ -52,6 +55,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: PageFrame(body: HomePage(),),
+      // home: PageFrame(body: HomePage(),),
     );
   }
 }

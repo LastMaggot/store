@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:store/code/all_image.dart';
 import 'package:store/comphonents/FunctionPageFrame.dart';
+import 'package:store/comphonents/overlay_window.dart';
+import 'package:store/comphonents/quick_window.dart';
 import 'package:store/comphonents/rounded_rectangle.dart';
 import 'package:store/pojo/app_pojo.dart';
+import 'package:store/service/customer_service.dart';
 import 'package:store/style/app_style.dart';
 
 class GoodsDetail extends StatefulWidget {
@@ -16,6 +20,47 @@ class GoodsDetail extends StatefulWidget {
 }
 
 class _GoodsDetailState extends State<GoodsDetail> {
+
+  OverlayWindow overlayWindow = OverlayWindow();
+
+  void addToCarts() async {
+    if(CustomerService.hasLogin(context: context)) {
+      return;
+    }
+    showOverlayWindow();
+  }
+
+  void buy() async {
+    if(CustomerService.hasLogin(context: context)) {
+
+      return;
+    }
+    showOverlayWindow();
+  }
+
+  void showOverlayWindow() {
+    overlayWindow.show(context: context);
+    setState(() {
+
+    });
+  }
+
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Fluttertoast.showToast(msg: "释放Detail页面");
+    overlayWindow.close(context: context);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    overlayWindow.buildQuickTips(context: context, msg: "去登录");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size windowSize = MediaQuery.of(context).size;
@@ -110,19 +155,25 @@ class _GoodsDetailState extends State<GoodsDetail> {
                       width: width * 0.35,
                       height: height * 0.1,
                       backgroundColor: Colors.amber,
-                      child: Text(
-                        '加入购物车',
-                        style: AppTextStyle.addToCarts,
-                      ),
+                      child: GestureDetector(
+                        onTap: addToCarts,
+                        child: Text(
+                          '加入购物车',
+                          style: AppTextStyle.addToCarts,
+                        ),
+                      )
                     ),
                     RoundedRectangle(
                       height: height * 0.1,
                       width: width * 0.35,
                       backgroundColor: Colors.redAccent,
-                      child: Text(
-                        '购买',
-                        style: AppTextStyle.buy,
-                      ),
+                      child: GestureDetector(
+                        onTap: buy,
+                        child: Text(
+                          '购买',
+                          style: AppTextStyle.buy,
+                        ),
+                      )
                     ),
                   ],
                 ),
