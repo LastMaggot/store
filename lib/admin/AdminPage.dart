@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:store/admin/left_slide_menu.dart';
 import 'package:store/comphonents/FunctionPageFrame.dart';
-import 'package:store/comphonents/menu_base.dart';
+import 'package:store/admin/left_slide_menu.dart';
 
 class AdminPage extends StatefulWidget {
 
