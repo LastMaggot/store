@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:store/admin/sign/admin_sign.dart';
+import 'package:store/admin/sign/admin_sign_in_form.dart';
 import 'package:store/appPages.dart';
 import 'package:store/app_bottom_modules/carts/cart_page.dart';
 import 'package:store/app_drawer_module/sign/sign_in/sign_in_form.dart';
@@ -40,7 +42,9 @@ class MyApp extends StatelessWidget {
           case "/user":
             return MaterialPageRoute(builder: (context) => PageFrame(body: UserPage(),));
           case "/admin":
-            return MaterialPageRoute(builder: (context) => PageFrame(body: AdminPage(),));
+            return MaterialPageRoute(builder: (context) => AdminPage());
+          case "/adminSign":
+            return MaterialPageRoute(builder: (context) => AdminSignPage(body: AdminSignInForm(),));
           case "/order":
             return MaterialPageRoute(builder: (context) => PageFrame(body: OrderPage(),));
           case "/shopping":
@@ -54,7 +58,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: PageFrame(body: HomePage(),),
+      home: AdminPage(),
       // home: PageFrame(body: HomePage(),),
     );
   }

@@ -7,10 +7,10 @@ import 'package:store/goods/goods_detail.dart';
 import 'package:store/style/app_style.dart';
 import 'package:store/pojo/app_pojo.dart';
 
-class GoodsItem extends StatelessWidget {
+class SearchGoodsItem extends StatelessWidget {
   Goods goods;
 
-  GoodsItem({Key? key, required this.goods}) : super(key: key);
+  SearchGoodsItem({Key? key, required this.goods}) : super(key: key);
 
   void jumpToDetail(BuildContext context) {
     Navigator.push(context,

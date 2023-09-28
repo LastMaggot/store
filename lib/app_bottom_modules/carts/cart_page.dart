@@ -39,7 +39,6 @@ class CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin {
 
   @override
   void initState() {
-    Fluttertoast.showToast(msg: "init Cart");
     // TODO: implement initState
     initGoodsList();
     super.initState();

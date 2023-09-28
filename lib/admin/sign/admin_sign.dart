@@ -6,16 +6,16 @@ import 'package:store/app_drawer_module/sign/sign_in/sign_in_form.dart';
 import 'package:store/app_drawer_module/sign/sign_up/sign_up_form.dart';
 import 'package:store/style/app_style.dart';
 
-class SignPage extends StatefulWidget {
+class AdminSignPage extends StatefulWidget {
   Widget? body;
 
-  SignPage({Key? key, this.body}) : super(key: key);
+  AdminSignPage({Key? key, this.body}) : super(key: key);
 
   @override
-  SignPageState createState() => SignPageState();
+  AdminSignPageState createState() => AdminSignPageState();
 }
 
-class SignPageState extends State<SignPage> {
+class AdminSignPageState extends State<AdminSignPage> {
   Widget? body;
 
   @override
@@ -38,17 +38,17 @@ class SignPageState extends State<SignPage> {
               const FlutterLogo(
                 size: 35,
               ),
-              const Text("登录蓝天购物平台"),
+              const Text("登录蓝天购物平台后台管理系统"),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/adminSign");
+              Navigator.pushNamed(context, "/sign");
             },
             child: Text(
-              "管理员登录",
+              "用户登录",
               style: AppTextStyle.topBarStyle,
             ),
           ),

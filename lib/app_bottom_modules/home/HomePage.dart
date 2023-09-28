@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   TextEditingController searchController = TextEditingController();
 
   void onSearch(String searchContent) {
@@ -23,8 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    Fluttertoast.showToast(msg: "初始化HomePage");
+
     super.initState();
   }
 

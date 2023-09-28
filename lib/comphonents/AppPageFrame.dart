@@ -3,6 +3,7 @@ import 'package:store/appPages.dart';
 import 'package:store/app_bottom_modules/carts/cart_page.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
+import 'package:store/service/customer_service.dart';
 import 'package:store/style/app_style.dart';
 import 'package:store/pojo/app_pojo.dart';
 import 'package:store/util/logs.dart';
@@ -70,6 +71,7 @@ class _PageFrameState extends State<PageFrame> {
                 size: 35,
               ),
               const Text("蓝天购物平台"),
+              Expanded(child: Text("购物车",textAlign: TextAlign.center,))
             ],
           ),
         ),
@@ -127,7 +129,15 @@ class _PageFrameState extends State<PageFrame> {
               leading: Icon(Icons.manage_accounts_rounded),
               title: Text("管理员登录"),
               onTap: () {},
-            )
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text("注销"),
+              onTap: () {
+                CustomerService.logout(context: context);
+                Navigator.pushReplacementNamed(context, '/sign');
+              },
+            ),
           ],
         ),
       ),

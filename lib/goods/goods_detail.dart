@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:store/code/all_image.dart';
 import 'package:store/comphonents/FunctionPageFrame.dart';
 import 'package:store/comphonents/overlay_window.dart';
-import 'package:store/comphonents/quick_window.dart';
 import 'package:store/comphonents/rounded_rectangle.dart';
 import 'package:store/pojo/app_pojo.dart';
 import 'package:store/service/customer_service.dart';
@@ -20,44 +19,51 @@ class GoodsDetail extends StatefulWidget {
 }
 
 class _GoodsDetailState extends State<GoodsDetail> {
-
   OverlayWindow overlayWindow = OverlayWindow();
 
   void addToCarts() async {
-    if(CustomerService.hasLogin(context: context)) {
+    if (CustomerService.hasLogin(context: context)) {
       return;
     }
     showOverlayWindow();
   }
 
   void buy() async {
-    if(CustomerService.hasLogin(context: context)) {
-
+    if (CustomerService.hasLogin(context: context)) {
       return;
     }
     showOverlayWindow();
   }
 
   void showOverlayWindow() {
-    overlayWindow.show(context: context);
-    setState(() {
-
+    overlayWindow.showConfirmationAlertDialog(context,
+        title: "用户登录检测",
+        content: "现在就去登入吗？",
+        buttonMsg: "去登录", buttonFunction: () {
+      Navigator.popAndPushNamed(context, '/sign');
     });
+    setState(() {});
   }
-
 
   @override
   void dispose() {
     // TODO: implement dispose
-    Fluttertoast.showToast(msg: "释放Detail页面");
-    overlayWindow.close(context: context);
+    try {
+      overlayWindow.close(context: context);
+    } catch (e) {}
     super.dispose();
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    overlayWindow.buildQuickTips(context: context, msg: "去登录");
+    overlayWindow.buildQuickTips(
+        context: context,
+        msg: "检测到您尚未进行登入",
+        buttonMsg: "去登录",
+        buttonFunction: () {
+          Navigator.pushNamed(context, '/sign');
+        });
     super.initState();
   }
 
@@ -152,29 +158,27 @@ class _GoodsDetailState extends State<GoodsDetail> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RoundedRectangle(
-                      width: width * 0.35,
-                      height: height * 0.1,
-                      backgroundColor: Colors.amber,
-                      child: GestureDetector(
-                        onTap: addToCarts,
-                        child: Text(
-                          '加入购物车',
-                          style: AppTextStyle.addToCarts,
-                        ),
-                      )
-                    ),
+                        width: width * 0.35,
+                        height: height * 0.1,
+                        backgroundColor: Colors.amber,
+                        child: GestureDetector(
+                          onTap: addToCarts,
+                          child: Text(
+                            '加入购物车',
+                            style: AppTextStyle.addToCarts,
+                          ),
+                        )),
                     RoundedRectangle(
-                      height: height * 0.1,
-                      width: width * 0.35,
-                      backgroundColor: Colors.redAccent,
-                      child: GestureDetector(
-                        onTap: buy,
-                        child: Text(
-                          '购买',
-                          style: AppTextStyle.buy,
-                        ),
-                      )
-                    ),
+                        height: height * 0.1,
+                        width: width * 0.35,
+                        backgroundColor: Colors.redAccent,
+                        child: GestureDetector(
+                          onTap: buy,
+                          child: Text(
+                            '购买',
+                            style: AppTextStyle.buy,
+                          ),
+                        )),
                   ],
                 ),
               ),

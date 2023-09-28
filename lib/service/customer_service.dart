@@ -37,4 +37,15 @@ class CustomerService {
     }
     return true;
   }
+
+  static bool logout({required BuildContext context}) {
+    try {
+      AppGlobals _appglobals = context.read<AppGlobals>();
+      _appglobals.clear();
+      return true;
+    } catch (e) {
+      Fluttertoast.showToast(msg: "消除用户信息失败");
+      return false;
+    }
+  }
 }

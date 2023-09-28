@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:store/Service/goods_service.dart';
-import 'package:store/comphonents/goods_item.dart';
+import 'package:store/serach/search_goods_item.dart';
 import 'package:store/comphonents/search_bar.dart';
 import 'package:store/pojo/app_pojo.dart';
 import 'package:store/style/app_style.dart';
@@ -22,7 +22,7 @@ class _SearchResultState extends State<SearchResult> {
 
   void createGoodsItems() {
     for (Goods goods in goodsList) {
-      goodsItems.add(GoodsItem(goods: goods));
+      goodsItems.add(SearchGoodsItem(goods: goods));
     }
   }
 
