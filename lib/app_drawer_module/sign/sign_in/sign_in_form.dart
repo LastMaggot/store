@@ -88,6 +88,16 @@ class _SignInFormState extends State<SignInForm> {
                       child: Text("注册"),
                     ),
                   ),
+                  const Padding(padding: EdgeInsets.only(bottom: 15)),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints.expand(height: 55.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/forget_password');
+                      },
+                      child: Text("忘记密码"),
+                    ),
+                  ),
                 ],
               )
           ),

@@ -12,4 +12,23 @@ class CustomerRequest {
         queryParameters: {"account": name, "password": password});
     return response;
   }
+
+  static Future<Response> signUp(String account, String password, String email) async {
+    Response response;
+    Customer customer = Customer(
+      account: account,
+      password: password,
+      username: "用户$account",
+      address: "null",
+      email: email,
+    );
+    response = await dio.post('$requestUrl/signUp',data: customer.toJson());
+    return response;
+  }
+
+  static Future<Response> forgetPassword(String account, String email) async {
+    Response response;
+    response = await dio.post('$requestUrl/forgetPassword',queryParameters: {"account":account,"email":email});
+    return response;
+  }
 }

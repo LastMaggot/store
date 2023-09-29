@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:store/admin/goods/goods_search.dart';
 import 'package:store/admin/sign/admin_sign.dart';
 import 'package:store/admin/sign/admin_sign_in_form.dart';
 import 'package:store/appPages.dart';
 import 'package:store/app_bottom_modules/carts/cart_page.dart';
+import 'package:store/app_drawer_module/sign/forget_password/forget_password.dart';
 import 'package:store/app_drawer_module/sign/sign_in/sign_in_form.dart';
 import 'package:store/app_drawer_module/sign/sign_up/sign_up_form.dart';
 import 'package:store/comphonents/AppPageFrame.dart';
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => SignPage(body: SignInForm(),));
           case "/sign_up":
             return MaterialPageRoute(builder: (context) => SignPage(body: SignUpForm(),));
+          case "/forget_password":
+            return MaterialPageRoute(builder: (context) => SignPage(body: ForgetPasswordForm(),));
           case "/user":
             return MaterialPageRoute(builder: (context) => PageFrame(body: UserPage(),));
           case "/admin":
@@ -58,8 +62,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: AdminPage(),
+      // home: AdminPage(),
       // home: PageFrame(body: HomePage(),),
+      home: AdminSignPage(body: AdminSignInForm(),),
     );
   }
 }

@@ -86,7 +86,7 @@ class SlideVerifyState extends State<SlideVerifyWidget> with TickerProviderState
           sliderDistance = 0;
         }
         /// 当滑动到最右边时，通知验证成功，并禁止滑动
-        if(sliderDistance > width - sliderWidth){
+        if(sliderDistance > width*0.7 - sliderWidth){
           sliderDistance = width - sliderWidth;
           enableSlide = false;
           verifySuccess = true;

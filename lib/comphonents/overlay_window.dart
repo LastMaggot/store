@@ -35,6 +35,7 @@ class OverlayWindow extends StatelessWidget {
                 }
                 else {
                   buttonFunction!.call();
+
                 }
               },
             ):Container(),

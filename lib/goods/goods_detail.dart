@@ -1,18 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:store/code/all_image.dart';
 import 'package:store/comphonents/FunctionPageFrame.dart';
 import 'package:store/comphonents/overlay_window.dart';
 import 'package:store/comphonents/rounded_rectangle.dart';
+import 'package:store/global/app_globals.dart';
 import 'package:store/pojo/app_pojo.dart';
+import 'package:store/service/CartService.dart';
 import 'package:store/service/customer_service.dart';
 import 'package:store/style/app_style.dart';
 
 class GoodsDetail extends StatefulWidget {
   Goods goods;
+  bool showExtraButton;
+  GoodsDetail({Key? key, required this.goods, this.showExtraButton = true}) : super(key: key);
 
-  GoodsDetail({Key? key, required this.goods}) : super(key: key);
+
 
   @override
   _GoodsDetailState createState() => _GoodsDetailState();
@@ -23,6 +28,8 @@ class _GoodsDetailState extends State<GoodsDetail> {
 
   void addToCarts() async {
     if (CustomerService.hasLogin(context: context)) {
+      Customer customer = context.read<AppGlobals>().customer!;
+      Future future = CartService.addToCart(customer.id!, widget.goods.id!, 1);
       return;
     }
     showOverlayWindow();
@@ -30,6 +37,7 @@ class _GoodsDetailState extends State<GoodsDetail> {
 
   void buy() async {
     if (CustomerService.hasLogin(context: context)) {
+      Customer customer = context.read<AppGlobals>().customer!;
       return;
     }
     showOverlayWindow();
@@ -152,7 +160,7 @@ class _GoodsDetailState extends State<GoodsDetail> {
                   style: AppTextStyle.goodsWidgetPrice,
                 ),
               ),
-              Positioned(
+              widget.showExtraButton==true?Positioned(
                 bottom: 30,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -181,7 +189,7 @@ class _GoodsDetailState extends State<GoodsDetail> {
                         )),
                   ],
                 ),
-              ),
+              ):Container(),
             ],
           ),
         ),

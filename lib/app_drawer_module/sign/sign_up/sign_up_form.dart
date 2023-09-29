@@ -2,6 +2,7 @@ import 'package:store/appPages.dart';
 import 'package:store/comphonents/slide_verify_widget.dart';
 import 'package:store/reference/references.dart';
 import 'package:flutter/material.dart';
+import 'package:store/service/customer_service.dart';
 import 'package:store/style/app_style.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -26,7 +27,15 @@ class _SignUpFormState extends State<SignUpForm> {
     if(!_canSendMailMessage) {
       Fluttertoast.showToast(msg: "请先通过滑块人机验证");
     }
-
+    String account = _accountController.text;
+    String password = _passwordController.text;
+    String email = _mailController.text;
+    Future future = CustomerService.signUp(account, password, email);
+    future.then((value) {
+      if(value) {
+        Navigator.pushReplacementNamed(context, '/sign_in');
+      }
+    });
   }
 
   @override
@@ -87,7 +96,7 @@ class _SignUpFormState extends State<SignUpForm> {
               controller: _mailController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               decoration: AppDecoration.inputDecorationFromLH(
-                  labelText: "邮箱", hintText: "请输入邮箱"),
+                  labelText: "邮箱", hintText: "请输入邮箱，请确保您输入的邮箱是正确的，必要时用于邮箱登录"),
               validator: (v) {
                 if (v!.isEmpty) return null;
                 RegExp accountRegex = RegExp(

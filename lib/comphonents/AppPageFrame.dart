@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:store/appPages.dart';
 import 'package:store/app_bottom_modules/carts/cart_page.dart';
+import 'package:store/app_drawer_module/userinfo/userinfo.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
 import 'package:store/service/customer_service.dart';
@@ -22,7 +23,7 @@ class _PageFrameState extends State<PageFrame> {
   CustomerLevel? level;
   bool? _isLogin;
 
-  final List<Widget> pages = [HomePage(),CartPage(),UserPage()];
+  final List<Widget> pages = [HomePage(),CartPage(),OrderPage()];
 
   @override
   void initState() {
@@ -122,13 +123,18 @@ class _PageFrameState extends State<PageFrame> {
               leading: Icon(Icons.person),
               title: Text('用户信息'),
               onTap: () {
+                if(_customer != null) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CustomerEditPage(customer: _customer!)));
+                }
                 // Handle onTap event for Settings
               },
             ),
             ListTile(
               leading: Icon(Icons.manage_accounts_rounded),
               title: Text("管理员登录"),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacementNamed(context, '/adminSign');
+              },
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app),

@@ -2,33 +2,30 @@ import 'package:store/appPages.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/reference/references.dart';
 import 'package:flutter/material.dart';
-import 'package:store/service/admin_service.dart';
 import 'package:store/service/customer_service.dart';
 import 'package:store/style/app_style.dart';
 import 'package:store/pojo/app_pojo.dart';
 
-class AdminSignInForm extends StatefulWidget {
+class ForgetPasswordForm extends StatefulWidget {
 
-  AdminSignInForm({Key? key}) : super(key: key);
+  ForgetPasswordForm({Key? key}) : super(key: key);
   @override
-  _AdminSignInFormState createState() => _AdminSignInFormState();
+  _ForgetPasswordFormState createState() => _ForgetPasswordFormState();
 }
 
-class _AdminSignInFormState extends State<AdminSignInForm> {
+class _ForgetPasswordFormState extends State<ForgetPasswordForm> {
   TextEditingController _accountController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  bool _showPassward = false;
+  TextEditingController _emailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void _onSignIn() {
+  void _onSend() {
     String account = _accountController.text;
-    String password = _passwordController.text;
-    Future<Customer?> future = AdminService.signIn(account, password);
+    String email = _emailController.text;
+    Future<bool> future = CustomerService.forgetPassword(account, email);
     future.then((value) {
       if(value == null) {
         return;
       }
-      Navigator.pushReplacementNamed(context, '/admin');
     });
   }
 
@@ -55,10 +52,9 @@ class _AdminSignInFormState extends State<AdminSignInForm> {
             height: 10,
           ),
           TextFormField(
-            controller: _passwordController,
+            controller: _emailController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: AppDecoration.inputDecorationFromLH(labelText: "密码",hintText: "请输入密码"),
-            obscureText: !_showPassward,
+            decoration: AppDecoration.inputDecorationFromLH(labelText: "邮箱",hintText: "请输入邮箱"),
           ),
           Padding(
               padding: const EdgeInsets.only(top: 25),
@@ -68,11 +64,27 @@ class _AdminSignInFormState extends State<AdminSignInForm> {
                   ConstrainedBox(
                     constraints: const BoxConstraints.expand(height: 55.0),
                     child: ElevatedButton(
-                      onPressed: _onSignIn,
-                      child: Text("登录"),
+                      onPressed: _onSend,
+                      child: Text("发送邮件"),
                     ),
                   ),
                   const Padding(padding: EdgeInsets.only(bottom: 15)),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints.expand(height: 55.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        SignPageState? signPageState = context.findAncestorStateOfType<SignPageState>();
+                        if(signPageState == null) {
+                          Fluttertoast.showToast(msg: "获取SignPage状态失败");
+                        }
+                        else {
+                          Fluttertoast.showToast(msg: "返回登入界面");
+                          Navigator.pushReplacementNamed(context, '/sign_in');
+                        }
+                      },
+                      child: Text("返回登入"),
+                    ),
+                  ),
                 ],
               )
           ),

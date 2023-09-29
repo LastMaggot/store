@@ -48,4 +48,26 @@ class CustomerService {
       return false;
     }
   }
+
+  static Future<bool> signUp(String account, String password, String email) async {
+    Response response = await CustomerRequest.signUp(account, password, email);
+    Result result = Result.fromResponse(response);
+    if(result.isValid()) {
+      Fluttertoast.showToast(msg: "注册成功");
+      return true;
+    }
+    Fluttertoast.showToast(msg: "注册失败");
+    return false;
+  }
+
+  static Future<bool> forgetPassword(String account, String email) async {
+    Response response = await CustomerRequest.forgetPassword(account,email);
+    Result result = Result.fromResponse(response);
+    if(result.isValid()) {
+      Fluttertoast.showToast(msg: "邮件已发送");
+      return true;
+    }
+    Fluttertoast.showToast(msg: "邮件发送失败，无效的邮箱");
+    return false;
+  }
 }

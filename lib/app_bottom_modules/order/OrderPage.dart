@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:store/app_bottom_modules/order/services/order_services.dart';
+import 'package:store/app_bottom_modules/order/OrderList.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/pojo/app_pojo.dart';
 import 'package:store/reference/references.dart';
@@ -14,7 +14,6 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   int? userId;
   List<Order> orderList = [];
-  OrderServices orderServices = OrderServices();
 
   @override
   void initState() {
@@ -32,6 +31,7 @@ class _OrderPageState extends State<OrderPage> {
     return Container(
       width: width*0.9,
       height: height*0.9,
+      child: OrderListWidget(),
     );
   }
 }
