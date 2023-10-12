@@ -18,6 +18,7 @@ class _UploadGoodsFormPageState extends State<UploadGoodsFormPage> {
   TextEditingController _publishingHouseController = TextEditingController();
   TextEditingController _purchaseCostController = TextEditingController();
   TextEditingController _retailPriceController = TextEditingController();
+  TextEditingController _inventoryController = TextEditingController();
 
 
 
@@ -97,6 +98,12 @@ class _UploadGoodsFormPageState extends State<UploadGoodsFormPage> {
                   keyboardType: TextInputType.number,
                   validator: validateNumber,
                 ),
+                TextFormField(
+                  controller: _inventoryController,
+                  decoration: InputDecoration(labelText: '库存'),
+                  keyboardType: TextInputType.number,
+                  validator: validateNumber,
+                ),
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
@@ -113,8 +120,9 @@ class _UploadGoodsFormPageState extends State<UploadGoodsFormPage> {
                       String publishingHouse = _publishingHouseController.text;
                       int purchaseCost = int.parse(_purchaseCostController.text);
                       int retailPrice = int.parse(_retailPriceController.text);
+                      int inventory = int.parse(_inventoryController.text);
                       // 在这里使用这些值执行提交操作
-                      Goods goods = Goods(0, name, manufacturer, pictureUrl, version, description, publishingHouse, purchaseCost, retailPrice);
+                      Goods goods = Goods(0, name, manufacturer, pictureUrl, version, description, publishingHouse, purchaseCost, retailPrice, inventory);
                       Future future = AdminService.addGoods(goods);
 
                     }

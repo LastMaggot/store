@@ -12,6 +12,7 @@ class Goods extends Object {
   String? publishingHouse;
   int? purchaseCost;
   int? retailPrice;
+  int? inventory;
 
   Goods(
       this.id,
@@ -22,7 +23,8 @@ class Goods extends Object {
       this.description,
       this.publishingHouse,
       this.purchaseCost,
-      this.retailPrice);
+      this.retailPrice,
+      this.inventory);
 
   factory Goods.fromJson(Map<String,dynamic> json) => _$GoodsFromJson(json);
 

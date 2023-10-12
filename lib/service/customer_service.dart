@@ -1,6 +1,7 @@
 import 'dart:js';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:store/comphonents/ResponseUtil.dart';
 import 'package:store/global/app_globals.dart';
@@ -8,6 +9,7 @@ import 'package:store/pojo/app_pojo.dart';
 import 'package:dio/dio.dart';
 import 'package:store/reference/references.dart';
 import 'package:store/request/customer_request.dart';
+import 'package:store/util/logs.dart';
 
 class CustomerService {
 
@@ -68,6 +70,22 @@ class CustomerService {
       return true;
     }
     Fluttertoast.showToast(msg: "邮件发送失败，无效的邮箱");
+    return false;
+  }
+
+  static Future<bool> loginByToken(String _token,{required BuildContext context}) async {
+    Response response = await CustomerRequest.loginByToken(_token);
+    Result<Customer> result = Result<Customer>.fromResponse(response,constructor: Customer.fromJson);
+    if(result.isValid()) {
+      Customer customer = result.data!;
+      Fluttertoast.showToast(msg: "登入成功");
+      if(kDebugMode) {
+        Logger.log(msg: customer.toString());
+      }
+      AppGlobals appGlobals = context.read<AppGlobals>();
+      appGlobals.customer = customer;
+      return true;
+    }
     return false;
   }
 }

@@ -31,4 +31,10 @@ class CustomerRequest {
     response = await dio.post('$requestUrl/forgetPassword',queryParameters: {"account":account,"email":email});
     return response;
   }
+
+  static Future<Response> loginByToken(String _token) async {
+    Response response;
+    response = await dio.get('$requestUrl/loginByToken',queryParameters: {"token":_token});
+    return response;
+  }
 }

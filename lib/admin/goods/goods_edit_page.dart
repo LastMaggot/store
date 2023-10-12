@@ -21,6 +21,7 @@ class _GoodsEditPageState extends State<GoodsEditPage> {
   TextEditingController _publishingHouseController = TextEditingController();
   TextEditingController _purchaseCostController = TextEditingController();
   TextEditingController _retailPriceController = TextEditingController();
+  TextEditingController _inventoryController = TextEditingController();
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _GoodsEditPageState extends State<GoodsEditPage> {
     _publishingHouseController.text = widget.goods!.publishingHouse ?? '';
     _purchaseCostController.text = widget.goods!.purchaseCost?.toString() ?? '';
     _retailPriceController.text = widget.goods!.retailPrice?.toString() ?? '';
+    _inventoryController.text = widget.goods!.inventory?.toString() ?? '';
   }
 
   @override
@@ -81,6 +83,11 @@ class _GoodsEditPageState extends State<GoodsEditPage> {
                 decoration: InputDecoration(labelText: '零售价'),
                 keyboardType: TextInputType.number,
               ),
+              TextFormField(
+                controller: _inventoryController,
+                decoration: InputDecoration(labelText: '库存'),
+                keyboardType: TextInputType.number,
+              ),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -97,11 +104,12 @@ class _GoodsEditPageState extends State<GoodsEditPage> {
                       widget.goods.publishingHouse = _publishingHouseController.text;
                       widget.goods.purchaseCost = int.parse(_purchaseCostController.text);
                       widget.goods.retailPrice = int.parse(_retailPriceController.text);
+                      widget.goods.inventory = int.parse(_inventoryController.text);
                       // 将编辑后的商品信息传递出去
                       Future future = AdminService.updGoods(widget.goods);
                       future.then((value) {
                         setState(() {
-
+                          Fluttertoast.showToast(msg: "注意刷新商品页面");
                         });
                       });
                     },
@@ -110,6 +118,7 @@ class _GoodsEditPageState extends State<GoodsEditPage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop();
+                      Fluttertoast.showToast(msg: "注意刷新商品页面");
                       // 取消操作
                     },
                     child: Text('取消'),

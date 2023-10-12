@@ -17,8 +17,6 @@ class GoodsDetail extends StatefulWidget {
   bool showExtraButton;
   GoodsDetail({Key? key, required this.goods, this.showExtraButton = true}) : super(key: key);
 
-
-
   @override
   _GoodsDetailState createState() => _GoodsDetailState();
 }
@@ -38,6 +36,9 @@ class _GoodsDetailState extends State<GoodsDetail> {
   void buy() async {
     if (CustomerService.hasLogin(context: context)) {
       Customer customer = context.read<AppGlobals>().customer!;
+      if(widget.goods.inventory! < 1 ) {
+        Fluttertoast.showToast(msg: "商品库存不足");
+      }
       return;
     }
     showOverlayWindow();

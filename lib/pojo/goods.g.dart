@@ -16,6 +16,7 @@ Goods _$GoodsFromJson(Map<String, dynamic> json) => Goods(
       json['publishingHouse'] as String?,
       json['purchaseCost'] as int?,
       json['retailPrice'] as int?,
+      json['inventory'] as int?,
     );
 
 Map<String, dynamic> _$GoodsToJson(Goods instance) => <String, dynamic>{
@@ -28,4 +29,5 @@ Map<String, dynamic> _$GoodsToJson(Goods instance) => <String, dynamic>{
       'publishingHouse': instance.publishingHouse,
       'purchaseCost': instance.purchaseCost,
       'retailPrice': instance.retailPrice,
+      'inventory': instance.inventory,
     };

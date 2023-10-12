@@ -11,6 +11,7 @@ Goods goods1 = Goods(
   "出版社A",
   100,
   150,
+  1,
 );
 
 // 创建另一个 Goods 实例
@@ -24,6 +25,7 @@ Goods goods2 = Goods(
   "出版社B",
   120,
   180,
+  2,
 );
 
 // 创建第三个 Goods 实例
@@ -37,4 +39,5 @@ Goods goods3 = Goods(
   "出版社C",
   90,
   130,
+  3,
 );

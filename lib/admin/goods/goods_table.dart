@@ -36,6 +36,7 @@ class _GoodsTableState extends State<GoodsTable> {
           DataCell(Text(goods.publishingHouse.toString())),
           DataCell(Text(goods.purchaseCost.toString())),
           DataCell(Text(goods.retailPrice.toString())),
+          DataCell(Text(goods.inventory.toString())),
           DataCell(Row(
             children: [
               InkWell(
@@ -170,6 +171,7 @@ class _GoodsTableState extends State<GoodsTable> {
                 DataColumn(label: Text('出版社')),
                 DataColumn(label: Text('进货成本')),
                 DataColumn(label: Text('零售价')),
+                DataColumn(label: Text('库存')),
                 DataColumn(label: Text('操作')),
               ],
               rows: goodsDataRows,

@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:store/admin/goods/goods_search.dart';
 import 'package:store/admin/sign/admin_sign.dart';
@@ -11,6 +13,8 @@ import 'package:store/comphonents/AppPageFrame.dart';
 import 'package:store/global/app_globals.dart';
 import 'package:store/pojo/app_pojo.dart';
 import 'package:store/reference/references.dart';
+import 'package:store/service/customer_service.dart';
+import 'package:store/util/logs.dart';
 
 void main() async {
   SharedPreferences cache = await SharedPreferences.getInstance();
@@ -25,6 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppGlobals appGlobals = context.read<AppGlobals>();
     return MaterialApp(
       builder: FToastBuilder(),
       themeMode: ThemeMode.light,
@@ -64,7 +69,26 @@ class MyApp extends StatelessWidget {
       ),
       // home: AdminPage(),
       // home: PageFrame(body: HomePage(),),
-      home: AdminSignPage(body: AdminSignInForm(),),
+      home: FutureBuilder<bool>(
+        future: CustomerService.loginByToken(appGlobals.token!, context: context),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          else if(snapshot.hasError || snapshot.data.isNull) {
+            Logger.error(msg: snapshot.stackTrace.toString());
+            Fluttertoast.showToast(msg: "使用token登录失败");
+            return AdminSignPage(body: AdminSignInForm(),);
+          }
+          else if(snapshot.hasData) {
+            bool status = snapshot.data!;
+            if(status == true) {
+              return PageFrame(body: HomePage(),);
+            }
+          }
+          return AdminSignPage(body: AdminSignInForm(),);
+        },
+      ),
     );
   }
 }
