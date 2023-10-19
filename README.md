@@ -32,35 +32,40 @@ Developed by **Flutter Framework**
 
 ---
 ##File Structure
->├─admin 管理员页面及功能相关
-│  ├─customer 
-│  ├─goods
-│  └─sign
-├─app_bottom_modules 应用底部菜单栏
-│  ├─carts
-│  ├─home
-│  ├─order
-│  └─shopping
-├─app_drawer_module 应用左侧菜单栏
-│  ├─project_introduce
-│  ├─sign
-│  │  ├─forget_password
-│  │  ├─sign_in
-│  │  └─sign_up
-│  └─userinfo
-├─code 使用自制Java脚本生成的Dart代码
-├─comphonents   常用组件
-├─constants     常量
-├─debug_data    测试用数据（废弃）
-├─global        全局状态管理
-├─goods         通用商品相关
-├─pojo          实体对象
-├─reference     
-├─request       HTTP请求
-├─serach        搜索相关页面
-├─service       业务逻辑
-├─style         常用样式 
-└─util          工具
+---
+##File Structure  
+>├─admin 管理员页面及功能相关  
+│  ├─customer   
+│  ├─goods  
+│  └─sign  
+|
+├─app_bottom_modules 应用底部菜单栏  
+│  ├─carts  
+│  ├─home  
+│  ├─order  
+│  └─shopping  
+|
+├─app_drawer_module 应用左侧菜单栏  
+│  ├─project_introduce  
+│  ├─sign  
+│  │  ├─forget_password  
+│  │  ├─sign_in  
+│  │  └─sign_up  
+│  └─userinfo  
+|
+├─code 使用自制Java脚本生成的Dart代码  
+├─comphonents   常用组件  
+├─constants     常量  
+├─debug_data    测试用数据（废弃）  
+├─global        全局状态管理  
+├─goods         通用商品相关  
+├─pojo          实体对象  
+├─reference       
+├─request       HTTP请求  
+├─serach        搜索相关页面  
+├─service       业务逻辑  
+├─style         常用样式   
+└─util          工具  
 >
 
 ---
