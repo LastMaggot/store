@@ -88,4 +88,13 @@ class CustomerService {
     }
     return false;
   }
+
+  static Future<bool> updateUserInfo(Customer customer) async {
+    Response response = await CustomerRequest.updateUserInfo(customer);
+    Result result = Result.fromResponse(response);
+    if(!result.isValid()) {
+      return false;
+    }
+    return true;
+  }
 }

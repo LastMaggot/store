@@ -10,8 +10,12 @@ class AppGlobals with ChangeNotifier {
   final SharedPreferences cache;
   AppGlobals({required this.cache}) {
     _token = cache.getString("token");
-    if(_token == null) cache.setString("token", "null");
-    if(kDebugMode) {
+    if (_token == null) {
+      cache.setString("token", "null");
+      _token = "null";
+    }
+    ;
+    if (kDebugMode) {
       Logger.log(msg: _token!.toString());
     }
   }

@@ -37,4 +37,10 @@ class CustomerRequest {
     response = await dio.get('$requestUrl/loginByToken',queryParameters: {"token":_token});
     return response;
   }
+
+  static Future<Response> updateUserInfo(Customer customer) async {
+    Response response;
+    response = await dio.put('$requestUrl/updateUserInfo',data: customer.toJson());
+    return response;
+  }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:store/service/admin_service.dart'; // 导入需要的服务文件
-import 'package:store/pojo/app_pojo.dart'; // 导入需要的数据模型文件
+import 'package:store/pojo/app_pojo.dart';
+import 'package:store/service/customer_service.dart'; // 导入需要的数据模型文件
 
 class CustomerEditPage extends StatefulWidget {
-  final Customer customer;
+  Customer customer;
 
   CustomerEditPage({Key? key, required this.customer}) : super(key: key);
 
@@ -84,15 +86,14 @@ class _CustomerEditPageState extends State<CustomerEditPage> {
                       widget.customer.phoneNumber = _phoneNumberController.text;
                       widget.customer.email = _emailController.text;
 
-                      // 将编辑后的客户信息传递出去
-                      // Future future = AdminService.updateCustomer(widget.customer);
-                      // future.then((value) {
-                      //   setState(() {
-                      //     // 根据服务返回的结果执行相应的操作
-                      //   });
-                      // });
-                      setState(() {
+                      Future future = CustomerService.updateUserInfo(widget.customer);
+                      future.then((value) {
+                        if(value == true) {
+                          Fluttertoast.showToast(msg: "更改成功");
+                        }
+                        setState(() {
 
+                        });
                       });
                     },
                     child: Text('提交修改'),
