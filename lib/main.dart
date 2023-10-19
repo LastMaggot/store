@@ -48,8 +48,6 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => SignPage(body: SignUpForm(),));
           case "/forget_password":
             return MaterialPageRoute(builder: (context) => SignPage(body: ForgetPasswordForm(),));
-          case "/user":
-            return MaterialPageRoute(builder: (context) => PageFrame(body: UserPage(),));
           case "/admin":
             return MaterialPageRoute(builder: (context) => AdminPage());
           case "/adminSign":
