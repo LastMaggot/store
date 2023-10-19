@@ -70,11 +70,11 @@ Developed by **Flutter Framework**
 
 ---
 ## How to Use
-Step1: Download Android Studio
-Step2: Open this project
-Step3: run:
->flutter pub get
->flutter pub upgrade
+Step1: Download Android Studio  
+Step2: Open this project  
+Step3: run:  
+>flutter pub get  
+>flutter pub upgrade  
 ---
 
 ## Thanks
