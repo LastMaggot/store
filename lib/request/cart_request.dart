@@ -20,4 +20,10 @@ class CartRequest {
     response = await dio.delete('$requestUrl/deleteFromCart',queryParameters: {"id":id});
     return response;
   }
+
+  static Future<Response> buy(int id, int goods_id, int num) async {
+    Response response;
+    response = await dio.put('$requestUrl/buy',queryParameters: {"cart_id":id,"goods_id":goods_id,"num":num});
+    return response;
+  }
 }

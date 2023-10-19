@@ -75,6 +75,7 @@ class CartGoodsItem extends StatelessWidget {
                   future.then((value) {
                     if(value == true) {
                       CartService.deleteFromCart(goods.id!);
+                      // CartService.buy(goods.id!, goods.id!, 1);
                     }
                   });
                 });

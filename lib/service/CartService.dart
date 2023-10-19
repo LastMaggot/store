@@ -40,4 +40,13 @@ class CartService {
     return false;
   }
 
+  static Future<bool> buy(int id, int goods_id, int num) async {
+    Response response = await CartRequest.buy(id, goods_id, num);
+    Result result = Result.fromResponse(response);
+    if(result.isValid()) {
+      return true;
+    }
+    return false;
+  }
+
 }
